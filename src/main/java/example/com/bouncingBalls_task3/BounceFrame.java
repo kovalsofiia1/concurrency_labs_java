@@ -1,9 +1,5 @@
 package example.com.bouncingBalls_task3;
 
-import example.com.bouncingBalls_task3.Ball;
-import example.com.bouncingBalls_task3.BallCanvas;
-import example.com.bouncingBalls_task3.BallThread;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,47 +7,58 @@ import java.awt.event.ActionListener;
 
 public class BounceFrame extends JFrame {
     private BallCanvas canvas;
-    public static final int WIDTH = 450;
-    public static final int HEIGHT = 350;
+    public static final int WIDTH = 700;
+    public static final int HEIGHT = 400;
+    private static final int BALL_SPACING = 15; // Відстань між кульками
+    private static final int NUM_BLUE_BALLS = 100; // Кількість синіх кульок
+    private static final int NUM_RED_BALLS = 3;
     public BounceFrame() {
         this.setSize(WIDTH, HEIGHT);
-        this.setTitle("Bounce programm");
+        this.setTitle("Bounce program");
         this.canvas = new BallCanvas();
-        System.out.println("In Frame Thread name = "
-                + Thread.currentThread().getName());
         Container content = this.getContentPane();
         content.add(this.canvas, BorderLayout.CENTER);
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.lightGray);
         JButton buttonStart = new JButton("Start");
         JButton buttonStop = new JButton("Stop");
+
         buttonStart.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
+                int xPos = 10; // Початкова позиція по X
 
-                Ball b = new Ball(canvas);
-                canvas.add(b);
+                for (int i = 0; i < NUM_BLUE_BALLS; i++) {
+                    Ball b = new Ball(canvas, xPos);
+                    canvas.add(b, Color.BLUE);
+                    BallThread runnable = new BallThread(b);
+                    Thread thread = new Thread(runnable);
+                    thread.setPriority(Thread.MIN_PRIORITY);
+                    thread.start();
+                    xPos += BALL_SPACING;
+                }
 
-                BallThread runnable = new BallThread(b);
-                Thread thread = new Thread(runnable);
-                thread.start();
-                System.out.println("Thread name = " +
-                        thread.getName());
+
+                xPos = 15;
+                // Створюємо одну червону кульку (високий пріоритет)
+                for (int i = 0; i < NUM_RED_BALLS; i++) {
+
+                    Ball redBall = new Ball(canvas, xPos);
+                    canvas.add(redBall, Color.RED);
+                    BallThread redRunnable = new BallThread(redBall);
+                    Thread redThread = new Thread(redRunnable);
+                    redThread.setPriority(Thread.MAX_PRIORITY);
+                    redThread.start();
+                    xPos += (WIDTH/NUM_RED_BALLS);
+                }
             }
         });
-        buttonStop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                System.exit(0);
-            }
-        });
-
+        buttonStop.addActionListener(e -> System.exit(0));
 
         buttonPanel.add(buttonStart);
         buttonPanel.add(buttonStop);
-
         content.add(buttonPanel, BorderLayout.SOUTH);
     }
 }
