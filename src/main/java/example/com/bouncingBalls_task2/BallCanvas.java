@@ -8,14 +8,8 @@ import java.util.List;
 public class BallCanvas extends JPanel {
     private List<Ball> balls = new ArrayList<>();
     private List<Pocket> pockets = new ArrayList<>();
-
-    public BallCanvas() {
-        int pocketSize = 30;
-        pockets.add(new Pocket(0, 0, pocketSize));
-        pockets.add(new Pocket(getWidth() - pocketSize, 0, pocketSize));
-        pockets.add(new Pocket(0, getHeight() - pocketSize, pocketSize));
-        pockets.add(new Pocket(getWidth() - pocketSize, getHeight() - pocketSize, pocketSize));
-    }
+    private int pocketSize = 30;
+    public BallCanvas() {}
 
     public void add(Ball b) {
         this.balls.add(b);
@@ -25,6 +19,11 @@ public class BallCanvas extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+        pockets.add(new Pocket(0, 0, pocketSize));
+        pockets.add(new Pocket(getWidth() - pocketSize, 0, pocketSize));
+        pockets.add(new Pocket(0, getHeight() - pocketSize, pocketSize));
+        pockets.add(new Pocket(getWidth() - pocketSize, getHeight() - pocketSize, pocketSize));
 
         // Малюємо лунки
         for (Pocket pocket : pockets) {
@@ -40,6 +39,8 @@ public class BallCanvas extends JPanel {
     public List<Pocket> getPockets() {
         return pockets;
     }
+
+    public int getPocketSize() {return pocketSize;}
 }
 
 
