@@ -32,7 +32,7 @@ public class BounceFrame extends JFrame {
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ball b = new Ball(canvas, canvas.getPockets());
+                Ball b = new Ball(canvas, canvas.getPockets(), canvas.getPocketSize());
                 canvas.add(b);
 
                 BallThread runnable = new BallThread(b, BounceFrame.this);

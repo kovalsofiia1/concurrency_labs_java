@@ -15,18 +15,17 @@ public class Ball {
     private int dy = 2;
     private boolean running = true;
     private List<Pocket> pockets; // Лунки
-    private int pocketSize;
-    public Ball(Component c, List<Pocket> pockets) {
+
+    public Ball(Component c, List<Pocket> pockets, int pocketSize) {
         this.canvas = c;
         this.pockets = pockets;
-//        this.pocketSize = pocketSize;
 
         if (Math.random() < 0.5) {
-            x = new Random().nextInt(30, this.canvas.getWidth()-30);
+            x = new Random().nextInt(pocketSize, this.canvas.getWidth()-pocketSize);
             y = 0;
         } else {
             x = 0;
-            y = new Random().nextInt(30, this.canvas.getHeight()-30);
+            y = new Random().nextInt(pocketSize, this.canvas.getHeight()-pocketSize);
         }
     }
 

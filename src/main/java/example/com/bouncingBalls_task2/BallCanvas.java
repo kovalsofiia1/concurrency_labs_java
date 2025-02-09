@@ -9,10 +9,21 @@ public class BallCanvas extends JPanel {
     private List<Ball> balls = new ArrayList<>();
     private List<Pocket> pockets = new ArrayList<>();
     private int pocketSize = 30;
+    private boolean initialized = false;
+
     public BallCanvas() {}
 
     public void add(Ball b) {
         this.balls.add(b);
+    }
+
+    private void initializePockets() {
+        if(initialized) {return;}
+        pockets.add(new Pocket(0, 0, pocketSize));
+        pockets.add(new Pocket(getWidth() - pocketSize, 0, pocketSize));
+        pockets.add(new Pocket(0, getHeight() - pocketSize, pocketSize));
+        pockets.add(new Pocket(getWidth() - pocketSize, getHeight() - pocketSize, pocketSize));
+        initialized = true;
     }
 
     @Override
@@ -20,17 +31,12 @@ public class BallCanvas extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        pockets.add(new Pocket(0, 0, pocketSize));
-        pockets.add(new Pocket(getWidth() - pocketSize, 0, pocketSize));
-        pockets.add(new Pocket(0, getHeight() - pocketSize, pocketSize));
-        pockets.add(new Pocket(getWidth() - pocketSize, getHeight() - pocketSize, pocketSize));
+        initializePockets();
 
-        // Малюємо лунки
         for (Pocket pocket : pockets) {
             pocket.draw(g2);
         }
 
-        // Малюємо кульки
         for (Ball b : balls) {
             b.draw(g2);
         }
