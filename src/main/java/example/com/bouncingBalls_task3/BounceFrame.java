@@ -9,9 +9,9 @@ public class BounceFrame extends JFrame {
     private BallCanvas canvas;
     public static final int WIDTH = 700;
     public static final int HEIGHT = 400;
-    private static final int BALL_SPACING = 15; // Відстань між кульками
     private static final int NUM_BLUE_BALLS = 100; // Кількість синіх кульок
     private static final int NUM_RED_BALLS = 3;
+    private static final int BALL_BLUE_SPACING = WIDTH/NUM_BLUE_BALLS;
     public BounceFrame() {
         this.setSize(WIDTH, HEIGHT);
         this.setTitle("Bounce program");
@@ -27,7 +27,7 @@ public class BounceFrame extends JFrame {
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int xPos = 10; // Початкова позиція по X
+                int xPos = 0; // Початкова позиція по X
 
                 for (int i = 0; i < NUM_BLUE_BALLS; i++) {
                     Ball b = new Ball(canvas, xPos);
@@ -36,11 +36,13 @@ public class BounceFrame extends JFrame {
                     Thread thread = new Thread(runnable);
                     thread.setPriority(Thread.MIN_PRIORITY);
                     thread.start();
-                    xPos += BALL_SPACING;
+                    xPos += BALL_BLUE_SPACING;
                 }
 
 
-                xPos = 15;
+
+                int RED_SPACING = WIDTH/(NUM_RED_BALLS+1);
+                xPos = RED_SPACING;
                 // Створюємо одну червону кульку (високий пріоритет)
                 for (int i = 0; i < NUM_RED_BALLS; i++) {
 
@@ -50,7 +52,7 @@ public class BounceFrame extends JFrame {
                     Thread redThread = new Thread(redRunnable);
                     redThread.setPriority(Thread.MAX_PRIORITY);
                     redThread.start();
-                    xPos += (WIDTH/NUM_RED_BALLS);
+                    xPos += RED_SPACING;
                 }
             }
         });

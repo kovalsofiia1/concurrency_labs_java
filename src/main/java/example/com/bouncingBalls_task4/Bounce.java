@@ -1,7 +1,5 @@
 package example.com.bouncingBalls_task4;
 
-import example.com.bouncingBalls_task4.BounceFrame;
-
 import javax.swing.*;
 
 public class Bounce {
