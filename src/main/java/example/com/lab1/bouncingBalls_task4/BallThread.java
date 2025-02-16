@@ -1,4 +1,4 @@
-package example.com.bouncingBalls_task4;
+package example.com.lab1.bouncingBalls_task4;
 
 public class BallThread implements Runnable {
     private Ball ball;

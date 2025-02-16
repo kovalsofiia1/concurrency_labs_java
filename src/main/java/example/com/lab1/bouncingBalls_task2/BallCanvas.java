@@ -1,4 +1,4 @@
-package example.com.bouncingBalls_task4;
+package example.com.lab1.bouncingBalls_task2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,3 +48,4 @@ public class BallCanvas extends JPanel {
 
     public int getPocketSize() {return pocketSize;}
 }
+

@@ -1,4 +1,4 @@
-package example.com.task5;
+package example.com.lab1.task5;
 
 
 public class CounterTest {

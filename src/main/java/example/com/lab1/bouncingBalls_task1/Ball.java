@@ -1,4 +1,4 @@
-package example.com.bouncingBalls_task1;
+package example.com.lab1.bouncingBalls_task1;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

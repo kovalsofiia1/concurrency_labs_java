@@ -1,4 +1,4 @@
-package example.com.bouncingBalls_task4;
+package example.com.lab1.bouncingBalls_task2;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -15,12 +15,10 @@ public class Ball {
     private int dy = 2;
     private boolean running = true;
     private List<Pocket> pockets; // Лунки
-    private Color color;
 
-    public Ball(Component c, List<Pocket> pockets, int pocketSize, Color color) {
+    public Ball(Component c, List<Pocket> pockets, int pocketSize) {
         this.canvas = c;
         this.pockets = pockets;
-        this.color = color;
 
         if (Math.random() < 0.5) {
             x = new Random().nextInt(pocketSize+XSIZE, this.canvas.getWidth() - pocketSize - XSIZE);
@@ -37,7 +35,7 @@ public class Ball {
 
     public void draw(Graphics2D g2) {
         if (running) {
-            g2.setColor(color);
+            g2.setColor(Color.darkGray);
             g2.fill(new Ellipse2D.Double(x, y, XSIZE, YSIZE));
         }
     }
@@ -48,7 +46,6 @@ public class Ball {
         x += dx;
         y += dy;
 
-        // Відбивання від стін
         if (x < 0) {
             x = 0;
             dx = -dx;
@@ -66,10 +63,10 @@ public class Ball {
             dy = -dy;
         }
 
-        // Перевірка на потрапляння в лунку
+
         for (Pocket pocket : pockets) {
             if (pocket.contains(x, y, XSIZE)) {
-                running = false; // Кулька зникла
+                running = false;
                 return;
             }
         }
@@ -77,5 +74,4 @@ public class Ball {
         this.canvas.repaint();
     }
 }
-
 

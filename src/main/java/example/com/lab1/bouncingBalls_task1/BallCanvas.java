@@ -1,4 +1,4 @@
-package example.com.bouncingBalls_task1;
+package example.com.lab1.bouncingBalls_task1;
 
 import javax.swing.*;
 import java.awt.*;

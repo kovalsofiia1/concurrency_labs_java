@@ -1,4 +1,4 @@
-package example.com.bouncingBalls_task4;
+package example.com.lab1.bouncingBalls_task2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,34 +32,21 @@ public class BounceFrame extends JFrame {
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Ball redBall = new Ball(canvas, canvas.getPockets(), canvas.getPocketSize(), Color.RED);
-                    Ball blueBall = new Ball(canvas, canvas.getPockets(), canvas.getPocketSize(), Color.BLUE);
-                    Ball greenBall = new Ball(canvas, canvas.getPockets(), canvas.getPocketSize(), Color.GREEN);
+                Ball b = new Ball(canvas, canvas.getPockets(), canvas.getPocketSize());
+                canvas.add(b);
 
-                    canvas.add(redBall);
-                    canvas.add(blueBall);
-                    canvas.add(greenBall);
-
-                    BallThread redThread = new BallThread(redBall, BounceFrame.this, null);
-                    Thread t1 = new Thread(redThread);
-                    t1.start();
-
-                    BallThread blueThread = new BallThread(blueBall, BounceFrame.this, t1);
-                    Thread t2 = new Thread(blueThread);
-                    t2.start();
-
-                    BallThread greenThread = new BallThread(greenBall, BounceFrame.this, t2);
-                    Thread t3 = new Thread(greenThread);
-                    t3.start();
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                BallThread runnable = new BallThread(b, BounceFrame.this);
+                Thread thread = new Thread(runnable);
+                thread.start();
             }
         });
 
-        buttonStop.addActionListener(e -> System.exit(0));
+        buttonStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
         buttonPanel.add(buttonStart);
         buttonPanel.add(buttonStop);
@@ -74,3 +61,4 @@ public class BounceFrame extends JFrame {
         canvas.repaint();
     }
 }
+
