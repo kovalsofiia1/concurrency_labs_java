@@ -21,11 +21,11 @@ public class Ball {
         this.pockets = pockets;
 
         if (Math.random() < 0.5) {
-            x = new Random().nextInt(pocketSize, this.canvas.getWidth()-pocketSize);
+            x = new Random().nextInt(pocketSize+XSIZE, this.canvas.getWidth() - pocketSize - XSIZE);
             y = 0;
         } else {
             x = 0;
-            y = new Random().nextInt(pocketSize, this.canvas.getHeight()-pocketSize);
+            y = new Random().nextInt(pocketSize+YSIZE, this.canvas.getHeight() - pocketSize-YSIZE);
         }
     }
 

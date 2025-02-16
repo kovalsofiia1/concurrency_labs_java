@@ -1,4 +1,4 @@
-package example.com.bouncingBalls_task2;
+package example.com.bouncingBalls_task4;
 
 import java.awt.*;
 
@@ -22,4 +22,3 @@ public class Pocket {
         g2.fillRect(x, y, size, size);
     }
 }
-

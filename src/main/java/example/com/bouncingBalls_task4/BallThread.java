@@ -1,23 +1,32 @@
 package example.com.bouncingBalls_task4;
 
 public class BallThread implements Runnable {
-    private Ball b;
+    private Ball ball;
+    private BounceFrame frame;
+    private Thread waitForThread;
 
-    public BallThread(Ball ball){
-        b = ball;
+    public BallThread(Ball ball, BounceFrame frame, Thread waitForThread) {
+        this.ball = ball;
+        this.frame = frame;
+        this.waitForThread = waitForThread;
     }
+
     @Override
-    public void run(){
-        try{
-            for(int i=1; i<100; i++){
-                b.move();
-                System.out.println("Thread name = "
-                        + Thread.currentThread().getName());
-                Thread.sleep(5);
-
+    public void run() {
+        try {
+            if (waitForThread != null) {
+                waitForThread.join(); // Чекаємо завершення попереднього потоку
             }
-        } catch(InterruptedException ex){
 
+            while (ball.isRunning()) {
+                ball.move();
+                Thread.sleep(7);
+            }
+
+            frame.incrementCounter();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
