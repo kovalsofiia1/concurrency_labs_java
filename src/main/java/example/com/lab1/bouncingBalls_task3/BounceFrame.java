@@ -9,7 +9,7 @@ public class BounceFrame extends JFrame {
     private BallCanvas canvas;
     public static final int WIDTH = 700;
     public static final int HEIGHT = 400;
-    private static final int LOW_PRIORITY_BALLS = 300; // Кількість синіх кульок
+    private static final int LOW_PRIORITY_BALLS = 600; // Кількість синіх кульок
     private static final int HIGH_PRIORITY_BALLS = 1;
     private static final int BALL_BLUE_SPACING = WIDTH/LOW_PRIORITY_BALLS;
     public BounceFrame() {
