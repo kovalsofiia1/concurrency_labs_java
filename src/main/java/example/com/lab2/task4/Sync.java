@@ -1,4 +1,4 @@
-package example.com.task4;
+package example.com.lab2.task4;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

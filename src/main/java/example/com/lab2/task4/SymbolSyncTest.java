@@ -1,4 +1,4 @@
-package example.com.task4;
+package example.com.lab2.task4;
 
 public class SymbolSyncTest implements Runnable {
     private final char symbol;
