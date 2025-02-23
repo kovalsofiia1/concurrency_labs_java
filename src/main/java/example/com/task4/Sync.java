@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Sync {
-    private boolean permission = true;
+    private int permission = 0;
     private int num = 0;//symbols printed
     private boolean stop = false;
     private final int numLines;
@@ -14,7 +14,7 @@ public class Sync {
         this.numLines = lines;
         this.symbolsPerLine = symb;
     }
-    public synchronized void waitAndChange(boolean control, char s){
+    public synchronized void waitAndChange(int control, char s){
         while (getPermission()!=control){
             try{
                 wait();
@@ -23,19 +23,19 @@ public class Sync {
             }
         }
         System.out.print(s);
-        permission = !permission;
+        permission++;
         num++;
         if(num%symbolsPerLine==0){
             System.out.println();
         }
-        if(num+1==numLines*symbolsPerLine){
+        if(num+2==numLines*symbolsPerLine){
             stop=true;
         }
         notifyAll();
     }
 
-    boolean getPermission() {
-        return permission;
+    int getPermission() {
+        return permission%3;
     }
 
     boolean shouldStop() {

@@ -3,9 +3,9 @@ package example.com.task4;
 public class SymbolSyncTest implements Runnable {
     private final char symbol;
     private final Sync sync;
-    private final boolean controlValue;
+    private final int controlValue;
 
-    public SymbolSyncTest(char s, Sync permission, boolean control) {
+    public SymbolSyncTest(char s, Sync permission, int control) {
         symbol = s;
         this.sync = permission;
         this.controlValue = control;
@@ -13,10 +13,6 @@ public class SymbolSyncTest implements Runnable {
     @Override
     public void run() {
         while(!sync.shouldStop()){
-//            if(sync.getPermission()==controlValue){
-//                System.out.print(symbol);
-//                sync.changePermission();
-//            }
             sync.waitAndChange(controlValue, symbol);
 
         }
