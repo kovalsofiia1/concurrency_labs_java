@@ -4,7 +4,7 @@ class TransferThread extends Thread {
     private Bank bank;
     private int fromAccount;
     private int maxAmount;
-    private static final int REPS = 10000;
+    private static final int REPS = 1000;
 
     public TransferThread(Bank b, int from, int max){
         bank = b;
@@ -13,16 +13,19 @@ class TransferThread extends Thread {
     }
     @Override
     public void run(){
-        for (int i = 0; i < REPS; i++) {
-            int toAccount = (int) (bank.size() * Math.random());
-            int amount = (int) (maxAmount * Math.random() / REPS);
-            try {
+//        while (true) {
+        for(int j = 0; j < 100; j++){
+            for (int i = 0; i < REPS; i++) {
+                int toAccount = (int) (bank.size() * Math.random());
+                int amount = (int) (maxAmount * Math.random()/REPS);
+
                 bank.transfer(fromAccount, toAccount, amount);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+//                bank.transferSynchronized(fromAccount, toAccount, amount);
+//                bank.transferWithLock(fromAccount, toAccount, amount);
+//                bank.transferWithReadWriteLock(fromAccount, toAccount, amount);
+//                bank.transferWithAtomic(fromAccount, toAccount, amount);
             }
         }
-        bank.test();
     }
 }
 
