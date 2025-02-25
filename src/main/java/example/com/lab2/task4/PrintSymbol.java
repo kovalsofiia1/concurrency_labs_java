@@ -4,7 +4,7 @@ public class PrintSymbol {
 
     public static void main(String[] args) throws InterruptedException {
         int symbolsPerLine = 99;
-        int numLines = 99;
+        int numLines = 10;
         Sync permission = new Sync(numLines, symbolsPerLine);
         int controlValue = 0;
 

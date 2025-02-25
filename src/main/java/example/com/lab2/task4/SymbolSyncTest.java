@@ -13,7 +13,8 @@ public class SymbolSyncTest implements Runnable {
     @Override
     public void run() {
         while(!sync.shouldStop()){
-            sync.waitAndChange(controlValue, symbol);
+//            sync.waitAndChange(controlValue, symbol);
+            sync.print(symbol);
 
         }
     }

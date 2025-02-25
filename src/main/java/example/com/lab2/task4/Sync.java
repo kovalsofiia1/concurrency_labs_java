@@ -33,6 +33,16 @@ public class Sync {
         }
         notifyAll();
     }
+    public void print(char s){
+        num++;
+        System.out.print(s);
+        if(num%symbolsPerLine==0){
+            System.out.println();
+        }
+        if(num+2==numLines*symbolsPerLine){
+            stop=true;
+        }
+    }
 
     int getPermission() {
         return permission%3;
