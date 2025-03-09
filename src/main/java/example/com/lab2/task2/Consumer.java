@@ -18,7 +18,7 @@ public class Consumer implements Runnable {
             receivedCount++;
 
             try {
-                Thread.sleep(random.nextInt(10)); // Зменшена затримка
+                Thread.sleep(random.nextInt(10));
             } catch (InterruptedException e) {
 //                Thread.currentThread().interrupt();
             }
