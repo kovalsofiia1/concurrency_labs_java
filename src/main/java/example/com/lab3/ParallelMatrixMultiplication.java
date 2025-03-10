@@ -3,8 +3,8 @@ package example.com.lab3;
 public class ParallelMatrixMultiplication {
     public static void main(String[] args) {
 
-        int[] sizes = {500, 800, 1000, 1500, 2000, 2500};
-        int[] threadCounts = {4, 16, 64, 128};
+        int[] sizes = {500, 800, 1000};
+        int[] threadCounts = {4, 16, 64};
 
 
         for (int size : sizes) {
