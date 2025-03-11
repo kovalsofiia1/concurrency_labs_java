@@ -8,28 +8,29 @@ class StripedMatrixMultiplication {
         Matrix transposedB = matrixB.transpose(); // Транспонована матриця B
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         ResultMatrix resultMatrix = new ResultMatrix(matrixA.getRows(), matrixA.getCols());
+
         for (int row = 0; row < matrixA.getRows(); row++) {
+            final int[] rowA = matrixA.getRow(row); // Отримуємо рядок A
             final int currentRow = row;
             executor.execute(() -> {
                 for (int col = 0; col < matrixB.getCols(); col++) {
-                    int value = calculateCell(matrixA, transposedB, currentRow, col);
+                    int value = calculateCell(rowA, transposedB.getRow(col));
                     resultMatrix.set(currentRow, col, value);
                 }
             });
         }
 
         executor.shutdown();
-        while (!executor.isTerminated()) {};
+        while (!executor.isTerminated()) {}
         return resultMatrix;
     }
 
-    // Окремий метод для обчислення скалярного добутку рядка і стовпця
-    private static int calculateCell(Matrix matrixA, Matrix transposedB, int row, int col) {
+    // Окремий метод для обчислення скалярного добутку двох рядків
+    private static int calculateCell(int[] rowA, int[] rowB) {
         int sum = 0;
-        for (int k = 0; k < matrixA.getCols(); k++) {
-            sum += matrixA.get(row, k) * transposedB.get(col, k);
+        for (int k = 0; k < rowA.length; k++) {
+            sum += rowA[k] * rowB[k];
         }
         return sum;
     }
 }
-

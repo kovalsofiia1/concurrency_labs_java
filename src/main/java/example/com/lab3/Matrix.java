@@ -27,6 +27,10 @@ public class Matrix {
     public int get(int row, int col) {
         return data[row][col];
     }
+    public int[] getRow (int row) {
+        return data[row];
+    }
+
 
     public void set(int row, int col, int value) {
         data[row][col] = value;
